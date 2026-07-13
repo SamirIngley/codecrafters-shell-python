@@ -22,8 +22,8 @@ def main():
                 found, path = exe_path(cmd) 
                 split_args = args.split(' ')
 
-                new_path = []
-                new_path.extend(path, split_args)
+                new_path = [path]
+                new_path.extend(split_args)
 
                 if found:
                     subprocess.run(new_path, capture_output=True)
