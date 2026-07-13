@@ -27,7 +27,7 @@ def main():
                 # print(new_path)
 
                 if found:
-                    subprocess.run(new_path, capture_output=True)
+                    subprocess.run(new_path)
                 else: 
                     print(f"{cmd}: command not found")
 
