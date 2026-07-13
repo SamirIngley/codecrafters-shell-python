@@ -22,9 +22,10 @@ def main():
                 found, path = exe_path(cmd) 
                 split_args = args.split(' ')
 
-                new_path = [str(path)]
+                new_path = [cmd]
                 new_path.extend(split_args)
                 print(new_path)
+
                 if found:
                     subprocess.run(new_path, capture_output=True)
                 else: 
