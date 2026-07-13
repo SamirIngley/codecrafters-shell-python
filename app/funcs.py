@@ -11,30 +11,29 @@ def echo_cmd(args):
     print(args) 
 
 def type_cmd(args):
-    all_args = args.split()
-
-    if len(all_args) > 1:
-        print("Type command has too many arguments") 
-    elif len(all_args) == 0:
-        print("Type command requires argument")
+    if args in BUILTIN_CMDS.keys():
+        print(f"{args} is a shell builtin")
     else:
-        arg = all_args[0]
-        if arg in BUILTIN_CMDS.keys():
-            print(f"{arg} is a shell builtin")
-
+        found, path = exe_find(args)
+        if found:
+            print(f"{args} is {path}")
         else:
-            path_list = os.environ.get('PATH', '').split(os.pathsep)
-            found = False
+            print(f"{args}: not found")
+        
+def exe_find(args):
+    path_list = os.environ.get('PATH', '').split(os.pathsep)
+    found_path = None
+    found = False
 
-            for path_item in path_list:
-                check_path = Path(path_item) / arg
-                if check_path.is_file() and os.access(check_path, os.X_OK):
-                    print(f"{arg} is {check_path}")
-                    found = True
-                    
-            if not found:
-                print(f"{arg}: not found")
+    for path_item in path_list:
+        check_path = Path(path_item) / args
+        if check_path.is_file() and os.access(check_path, os.X_OK):
+            found_path = check_path
+            found = True
+            return found, found_path
 
+    return found, found_path
+    
 
 BUILTIN_CMDS = {
     

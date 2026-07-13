@@ -1,5 +1,9 @@
+import os
 import sys
-from app.funcs import BUILTIN_CMDS
+from pathlib import Path
+import subprocess
+
+from app.funcs import BUILTIN_CMDS, exe_find
 
 def main():
 
@@ -11,10 +15,15 @@ def main():
         if user_input:
             cmd, args = parse_input(user_input)
 
-            if cmd not in BUILTIN_CMDS.keys():
-                print(f"{cmd}: command not found")
-            else: 
+            if cmd in BUILTIN_CMDS.keys():
                 output_flag = BUILTIN_CMDS[cmd](args)
+
+            else: 
+                found, path = exe_find(args)
+                if found:
+                    subprocess.run([path])
+                else: 
+                    print(f"{cmd}: command not found")
 
         if output_flag == "exit program": 
             break
@@ -28,7 +37,6 @@ def parse_input(user_input):
     else: 
         cmd, args = user_in[0], None
     return cmd, args
-        
 
 
 if __name__ == "__main__":
