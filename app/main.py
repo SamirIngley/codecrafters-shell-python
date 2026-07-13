@@ -20,9 +20,6 @@ def main():
 
             else: 
                 found, path = exe_path(cmd) 
-                if " " in args:
-                    print("ARGS YO", args)
-                    args = args.split(" ")
 
                 new_path = [cmd]
                 new_path.extend(args)
