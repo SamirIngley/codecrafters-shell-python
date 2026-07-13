@@ -24,7 +24,7 @@ def main():
                 print("SPLIT ARGS: ", split_args)
 
                 new_path = [cmd]
-                new_path.append(args)
+                new_path.extend(split_args)
 
                 if found:
                     subprocess.run(new_path)
