@@ -4,6 +4,7 @@ from app.funcs import BUILTIN_CMDS
 def main():
 
     while True:
+        output_flag = None
         sys.stdout.write("$ ")
         user_input = input()
 
@@ -15,8 +16,8 @@ def main():
             else: 
                 output_flag = BUILTIN_CMDS[cmd](args)
 
-                if output_flag == "exit": 
-                    break
+        if output_flag == "exit program": 
+            break
                 
 
 def parse_input(user_input):
