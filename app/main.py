@@ -20,11 +20,11 @@ def main():
 
             else: 
                 found, path = exe_path(cmd) 
-                split_args = args.split()
-                # print("SPLIT ARGS: ", split_args)
-
                 new_path = [cmd]
-                new_path.extend(split_args)
+
+                if args:
+                    split_args = args.split()
+                    new_path.extend(split_args)
 
                 if found:
                     subprocess.run(new_path)
