@@ -22,7 +22,7 @@ def main():
                 found, path = exe_path(cmd) 
                 split_args = args.split(' ')
 
-                new_path = [path]
+                new_path = [str(path)]
                 new_path.extend(split_args)
                 print(new_path)
                 if found:
