@@ -21,7 +21,7 @@ def main():
             else: 
                 found, path = exe_path(cmd) 
                 if " " in args:
-                    print(args)
+                    print("ARGS YO", args)
                     args = args.split(" ")
 
                 new_path = [cmd]
