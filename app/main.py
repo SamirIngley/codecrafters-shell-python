@@ -1,5 +1,5 @@
 import sys
-from app.funcs import VALID_COMMANDS
+from app.funcs import BUILTIN_CMDS
 
 def main():
 
@@ -8,16 +8,25 @@ def main():
         user_input = input()
 
         if user_input:
-            command = user_input.split()[0]
-            
-            if command not in VALID_COMMANDS.keys():
-                print(f"{command}: command not found")
+            cmd, args = parse_input(user_input)
+
+            if cmd not in BUILTIN_CMDS.keys():
+                print(f"{cmd}: command not found")
             else: 
-                output_flag = VALID_COMMANDS[command](user_input)
+                output_flag = BUILTIN_CMDS[cmd](args)
 
                 if output_flag == "exit": 
                     break
                 
+
+def parse_input(user_input):
+    user_in = user_input.split(' ',1)
+
+    if len(user_in) > 1: 
+        cmd, args = user_in[0], user_in[1]
+    else: 
+        cmd, args = user_in[0], None
+    return cmd, args
         
 
 
