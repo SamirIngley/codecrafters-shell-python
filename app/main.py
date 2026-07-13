@@ -19,10 +19,10 @@ def main():
                 output_flag = BUILTIN_CMDS[cmd](args)
 
             else: 
-                found, path = exe_path(cmd)
-                path 
+                found, path = exe_path(cmd) 
                 if found:
-                    subprocess.run([path / args])
+                    new_path = str(path) + args
+                    subprocess.run([new_path])
                 else: 
                     print(f"{cmd}: command not found")
 
