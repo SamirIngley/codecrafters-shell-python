@@ -10,23 +10,23 @@ def exit_cmd(args):
 def echo_cmd(args):
     print(args) 
 
-def type_cmd(args):
-    if args in BUILTIN_CMDS.keys():
-        print(f"{args} is a shell builtin")
+def type_cmd(cmd):
+    if cmd in BUILTIN_CMDS.keys():
+        print(f"{cmd} is a shell builtin")
     else:
-        found, path = exe_find(args)
+        found, path = exe_find(cmd)
         if found:
-            print(f"{args} is {path}")
+            print(f"{cmd} is {path}")
         else:
-            print(f"{args}: not found")
+            print(f"{cmd}: not found")
         
-def exe_find(args):
+def exe_find(exe):
     path_list = os.environ.get('PATH', '').split(os.pathsep)
     found_path = None
     found = False
 
     for path_item in path_list:
-        check_path = Path(path_item) / args
+        check_path = Path(path_item) / exe
         if check_path.is_file() and os.access(check_path, os.X_OK):
             found_path = check_path
             found = True

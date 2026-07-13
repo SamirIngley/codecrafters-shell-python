@@ -19,7 +19,7 @@ def main():
                 output_flag = BUILTIN_CMDS[cmd](args)
 
             else: 
-                found, path = exe_find(args)
+                found, path = exe_find(cmd)
                 if found:
                     subprocess.run([path])
                 else: 
