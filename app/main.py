@@ -20,8 +20,9 @@ def main():
 
             else: 
                 found, path = exe_path(cmd) 
+                # path_args = [path, args] 
                 if found:
-                    subprocess.run([path_args])
+                    subprocess.run([path, args])
                 else: 
                     print(f"{cmd}: command not found")
 
