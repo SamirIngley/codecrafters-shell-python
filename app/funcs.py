@@ -14,13 +14,13 @@ def type_cmd(cmd):
     if cmd in BUILTIN_CMDS.keys():
         print(f"{cmd} is a shell builtin")
     else:
-        found, path = exe_find(cmd)
+        found, path = exe_path(cmd)
         if found:
             print(f"{cmd} is {path}")
         else:
             print(f"{cmd}: not found")
         
-def exe_find(exe):
+def exe_path(exe):
     path_list = os.environ.get('PATH', '').split(os.pathsep)
     found_path = None
     found = False

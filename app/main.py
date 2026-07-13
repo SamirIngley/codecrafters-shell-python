@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 import subprocess
 
-from app.funcs import BUILTIN_CMDS, exe_find
+from app.funcs import BUILTIN_CMDS, exe_path
 
 def main():
 
@@ -19,9 +19,9 @@ def main():
                 output_flag = BUILTIN_CMDS[cmd](args)
 
             else: 
-                found, path = exe_find(cmd)
+                found, path = exe_path(cmd)
                 if found:
-                    subprocess.run([path])
+                    subprocess.run([user_input])
                 else: 
                     print(f"{cmd}: command not found")
 
