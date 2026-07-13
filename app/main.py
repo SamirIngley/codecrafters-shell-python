@@ -22,7 +22,7 @@ def main():
                 found, path = exe_path(cmd) 
 
                 new_path = [cmd]
-                new_path.extend(args)
+                new_path.append(args)
                 print("ARGS YOOOOOOOOOOOOOOOOOOOOOOOO: ", args)
 
                 if found:
