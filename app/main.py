@@ -23,7 +23,7 @@ def main():
 
                 new_path = [cmd]
                 new_path.extend(args)
-                # print(new_path)
+                print("NEW PATH: ", new_path)
 
                 if found:
                     subprocess.run(new_path)
