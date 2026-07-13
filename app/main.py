@@ -24,7 +24,7 @@ def main():
 
                 new_path = [cmd]
                 new_path.extend(split_args)
-                print(new_path)
+                # print(new_path)
 
                 if found:
                     subprocess.run(new_path, capture_output=True)
