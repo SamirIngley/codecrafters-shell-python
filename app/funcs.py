@@ -6,7 +6,8 @@ def cd_cmd(args):
     # can be absolute path or not absolute path I think? 
     if target_dir.is_dir():
         os.chdir(target_dir)
-        # print(Path.cwd())
+    elif args == "~":
+        os.chdir(Path.home())
     else: 
         print(f"cd: {target_dir}: No such file or directory")
 
