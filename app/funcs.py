@@ -1,6 +1,16 @@
 import os
 from pathlib import Path
 
+def cd_cmd(args):
+    target_dir = Path(str(args))
+    # can be absolute path or not absolute path I think? 
+    if target_dir.is_dir():
+        os.chdir(target_dir)
+        # print(Path.cwd())
+    else: 
+        print(f"cd: {target_dir}: No such file or directory")
+
+
 def exit_cmd(args):
     if args:
         print("Exit command does not accept arguments or trailing spaces")
@@ -45,7 +55,8 @@ def type_cmd(arg):
 
 
 BUILTIN_CMDS = {
-    
+
+    "cd":cd_cmd,
     "exit":exit_cmd,
     "echo":echo_cmd,
     "help":help_cmd,
