@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 def exit_cmd(args):
-    if args not in [None, "", " "]:
+    if args:
         print("Exit command does not accept arguments or trailing spaces")
     else:
         return "exit program"
@@ -10,35 +10,46 @@ def exit_cmd(args):
 def echo_cmd(args):
     print(args) 
 
-def type_cmd(cmd):
-    if cmd in BUILTIN_CMDS.keys():
-        print(f"{cmd} is a shell builtin")
-    else:
-        found, path = exe_path(cmd)
-        if found:
-            print(f"{cmd} is {path}")
-        else:
-            print(f"{cmd}: not found")
-        
 def exe_path(exe):
     path_list = os.environ.get('PATH', '').split(os.pathsep)
     found_path = None
-    found = False
 
     for path_item in path_list:
         check_path = Path(path_item) / exe
         if check_path.is_file() and os.access(check_path, os.X_OK):
             found_path = check_path
-            found = True
-            return found, found_path
+            return found_path
 
-    return found, found_path
-    
+    return found_path
+
+def help_cmd(args):
+    if args:
+        print("Help command does not accept arguments or trailing spaces")
+    else:
+        print("\nBuiltin Commands: ", *(item for item in BUILTIN_CMDS.keys()), sep='\n')
+        print("\n")
+
+def pwd_cmd(args):
+    current_working_directory = Path.cwd()
+    print(current_working_directory)
+
+def type_cmd(arg):
+    if arg in BUILTIN_CMDS.keys():
+        print(f"{arg} is a shell builtin")
+    else:
+        path = exe_path(arg)
+        if path:
+            print(f"{arg} is {path}")
+        else:
+            print(f"{arg}: not found")
+
 
 BUILTIN_CMDS = {
     
     "exit":exit_cmd,
     "echo":echo_cmd,
+    "help":help_cmd,
+    "pwd":pwd_cmd,
     "type":type_cmd,
 
     }

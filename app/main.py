@@ -3,9 +3,12 @@ import sys
 from pathlib import Path
 import subprocess
 
+# remove app. when running locally with `python3 main.py`
 from app.funcs import BUILTIN_CMDS, exe_path
 
 def main():
+    # map the user input/command to a function, either in the builtins
+    # or thorugh an executable. If the function impacts this program, declare in output_flag
 
     while True:
         output_flag = None
@@ -16,17 +19,18 @@ def main():
             cmd, args = parse_input(user_input)
 
             if cmd in BUILTIN_CMDS.keys():
+                # calls cmd and output is stored in flag
                 output_flag = BUILTIN_CMDS[cmd](args)
 
             else: 
-                found, path = exe_path(cmd) 
+                path = exe_path(cmd) 
                 new_path = [cmd]
 
                 if args:
                     split_args = args.split()
                     new_path.extend(split_args)
 
-                if found:
+                if path:
                     subprocess.run(new_path)
                 else: 
                     print(f"{cmd}: command not found")

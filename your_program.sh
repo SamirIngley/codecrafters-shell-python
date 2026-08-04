@@ -18,3 +18,5 @@ PYTHONSAFEPATH=1 PYTHONPATH="$SCRIPT_DIR" exec uv run \
   --quiet \
   -m app.main \
   "$@"
+
+# to run program: ./your_program.sh
